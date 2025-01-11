@@ -26,7 +26,21 @@ namespace company.Migrations
                     b.Property<byte>("Count")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TitleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TitleId");
 
                     b.ToTable("InstallmentTypes");
                 });
@@ -37,16 +51,28 @@ namespace company.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Amount")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Code")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("InstallmentTypeId")
+                    b.Property<DateTime>("FirstInstallmentDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("InstallmentTypeId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("LastInstallmentDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<int?>("PersonId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PriceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TitleId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -54,6 +80,10 @@ namespace company.Migrations
                     b.HasIndex("InstallmentTypeId");
 
                     b.HasIndex("PersonId");
+
+                    b.HasIndex("PriceId");
+
+                    b.HasIndex("TitleId");
 
                     b.ToTable("Loans");
                 });
@@ -64,23 +94,42 @@ namespace company.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Amount")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("InstallmentDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("LoanId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("PersonId")
+                    b.Property<int>("PersonId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<int>("PriceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ReceiptId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Score")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TraceNumber")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("LoanId");
 
                     b.HasIndex("PersonId");
+
+                    b.HasIndex("PriceId");
+
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Pays");
                 });
@@ -151,19 +200,107 @@ namespace company.Migrations
                         });
                 });
 
+            modelBuilder.Entity("khaan.Models.Price", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Amount")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TitleId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TitleId");
+
+                    b.ToTable("Price");
+                });
+
+            modelBuilder.Entity("khaan.Models.Status", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TitleId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TitleId");
+
+                    b.ToTable("Status");
+                });
+
+            modelBuilder.Entity("khaan.Models.Title", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Caption")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Titles");
+                });
+
+            modelBuilder.Entity("khaan.Models.InstallmentType", b =>
+                {
+                    b.HasOne("khaan.Models.Title", "Title")
+                        .WithMany()
+                        .HasForeignKey("TitleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Title");
+                });
+
             modelBuilder.Entity("khaan.Models.Loan", b =>
                 {
                     b.HasOne("khaan.Models.InstallmentType", "InstallmentType")
                         .WithMany()
-                        .HasForeignKey("InstallmentTypeId");
+                        .HasForeignKey("InstallmentTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("khaan.Models.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId");
 
+                    b.HasOne("khaan.Models.Price", "Price")
+                        .WithMany()
+                        .HasForeignKey("PriceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("khaan.Models.Title", "Title")
+                        .WithMany()
+                        .HasForeignKey("TitleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("InstallmentType");
 
                     b.Navigation("Person");
+
+                    b.Navigation("Price");
+
+                    b.Navigation("Title");
                 });
 
             modelBuilder.Entity("khaan.Models.Pay", b =>
@@ -174,11 +311,51 @@ namespace company.Migrations
 
                     b.HasOne("khaan.Models.Person", "Person")
                         .WithMany()
-                        .HasForeignKey("PersonId");
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("khaan.Models.Price", "Price")
+                        .WithMany()
+                        .HasForeignKey("PriceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("khaan.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Loan");
 
                     b.Navigation("Person");
+
+                    b.Navigation("Price");
+
+                    b.Navigation("Status");
+                });
+
+            modelBuilder.Entity("khaan.Models.Price", b =>
+                {
+                    b.HasOne("khaan.Models.Title", "Title")
+                        .WithMany()
+                        .HasForeignKey("TitleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Title");
+                });
+
+            modelBuilder.Entity("khaan.Models.Status", b =>
+                {
+                    b.HasOne("khaan.Models.Title", "Title")
+                        .WithMany()
+                        .HasForeignKey("TitleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Title");
                 });
 #pragma warning restore 612, 618
         }

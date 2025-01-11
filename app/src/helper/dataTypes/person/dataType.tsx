@@ -4,3 +4,12 @@ export interface Person {
   lastName: string;
   phone: string;
 }
+export interface Title {
+  id: number;
+  caption: string;
+}
+export interface InstallmentType {
+  id: number;
+  count: number;
+  titleId: number;
+}

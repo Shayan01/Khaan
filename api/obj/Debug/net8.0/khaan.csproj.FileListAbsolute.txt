@@ -487,3 +487,4 @@ E:\MyPrograms\Khaan\api\obj\Debug\net8.0\refint\khaan.dll
 E:\MyPrograms\Khaan\api\obj\Debug\net8.0\khaan.pdb
 E:\MyPrograms\Khaan\api\obj\Debug\net8.0\khaan.genruntimeconfig.cache
 E:\MyPrograms\Khaan\api\obj\Debug\net8.0\ref\khaan.dll
+E:\MyPrograms\Khaan\api\obj\Debug\net8.0\khaan.sourcelink.json

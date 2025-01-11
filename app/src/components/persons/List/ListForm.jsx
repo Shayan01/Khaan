@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { Table, Button, Flex, } from 'antd'
-import { columns } from '../../../helper/constants/personColomns'
+import { personsColumns } from '../../../helper/constants/personColomns'
 import EditForm from '../Edit/EditForm'
 import DeleteForm from '../Delete/DeleteForm'
 import AddForm from '../Add/AddForm';
 import '../../../App.css'
 import { topButtons } from '../../../helper/Styles/Person/List/style'
 
-function ListForm({ persons , loading, searchHandler, searchText,setLoading,refreshPage }) {
+function ListForm({ persons , loading, searchHandler, searchText, setLoading, refreshPage, mainButtonHandler }) {
   const [personSelectedForEdit, setPersonSelectedForEdit] = useState(null)
   const [personSelectedForDelete, setPersonSelectedForDelete] = useState(null)
   const [AddNewPerson, setAddNewPerson] = useState(false)
@@ -96,6 +96,9 @@ function ListForm({ persons , loading, searchHandler, searchText,setLoading,refr
         <Button type="primary" onClick={() => setAddNewPerson(true)}>
           افزودن
         </Button>
+        <Button type="primary"   onClick={()=>mainButtonHandler("")}>
+          بازگشت
+        </Button>
       </Flex>
       <Flex style={topButtons}  wrap>
         <input type="search" onChange={searchHandler} value={searchText} />
@@ -111,7 +114,7 @@ function ListForm({ persons , loading, searchHandler, searchText,setLoading,refr
               )
             : persons
         }
-        columns={columns}
+        columns={personsColumns}
         rowKey={persons.id}
         loading={loading}
       ></Table>

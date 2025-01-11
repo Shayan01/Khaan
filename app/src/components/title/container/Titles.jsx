@@ -1,13 +1,13 @@
-import  React, { useEffect, useState } from 'react'
+import   { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Table, Button, Flex } from 'antd'
-import {PERSON_URL} from './helper/constants/personColomns'
-import './App.css'
+import { TITLE_URL } from '../../../helper/constants/personColomns'
+import '../../../App.css'
 
-import ListForm from './components/persons/List/ListForm'
+import List from '../list/List'
+import { Flex } from 'antd'
 
-function App() {
-  const [persons, setPersons] = useState([])
+function Titles({mainButtonHandler}) {
+  const [titles, setTitles] = useState([])
   const [loading, setLoading] = useState(true)
   const [searchText, setSearchText] = useState('')
 
@@ -21,8 +21,8 @@ function App() {
   }
   useEffect(
     () => {
-      axios.get(PERSON_URL).then((res) => {
-        setPersons(res.data)
+      axios.get(TITLE_URL).then((res) => {
+        setTitles(res.data)
         // console.log('res.data', res.data)
         setLoading(false)
       })
@@ -34,8 +34,9 @@ function App() {
     <div>Loading...</div>
   ) :  (
     <Flex style={{margin : "0 2%"}} vertical>
-      <ListForm
-        persons={persons}
+      <List
+      mainButtonHandler={mainButtonHandler}
+      titles={titles}
         loading={loading}
         searchText={searchText}
         searchHandler={searchHandler}
@@ -46,4 +47,4 @@ function App() {
   )
 }
 
-export default App
+export default Titles

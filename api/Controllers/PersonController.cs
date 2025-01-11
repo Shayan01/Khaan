@@ -20,7 +20,7 @@ namespace company.Controllers
         [HttpGet]
         public IEnumerable<Person> Get()
         {
-            return _khaanContext.Persons.Where(x => x.DeletedAt == null);
+            return _khaanContext.Persons.Where(p => p.DeletedAt == null);
         }
         [HttpGet("{id}")]
         public Person Get(int id)
