@@ -1,14 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { INSTALLMENT_TYPE_URL } from "../../../helper/constants/personColomns";
+import {
+  INSTALLMENT_TYPE_URL,
+  TITLE_URL,
+} from "../../../helper/constants/personColomns";
 import { InstallmentTypeAddForm } from "../../../helper/dataTypes/person/Add/dataTypes";
-import { InstallmentType } from "../../../helper/dataTypes/person/dataType";
+import {
+  InstallmentType,
+  Title,
+} from "../../../helper/dataTypes/person/dataType";
 import { Button, Flex } from "antd";
 import { topButtons } from "../../../helper/Styles/Person/List/style";
+import List from "../list/List";
+import Select from "../../title/select/Select";
 
 function Add({ cancleAdd, refreshPage }: InstallmentTypeAddForm) {
   const [installmentTypeValues, setInstallmentTypeValues] =
     useState<InstallmentType>({ id: 0, count: 0, titleId: 0 });
+
+  const [selectTitle, setSelectTitle] = useState(false);
+  const [selectedTitle, setSelectedTitle] = useState({id:0, caption : ''});
+
+  const titleSelectHandler = () => setSelectTitle(true);
   const AddPerson = () => {
     let newInstallmentTypeValues = {
       id: installmentTypeValues.id,
@@ -41,16 +54,19 @@ function Add({ cancleAdd, refreshPage }: InstallmentTypeAddForm) {
         break;
     }
   };
-  return (
+  return selectTitle ? (
+    <Select titleSelectHandler={titleSelectHandler} setSelectTitle={setSelectTitle} setSelectedTitle = {setSelectedTitle} />
+  ) : (
     <Flex style={topButtons} vertical gap="middle">
       <Flex gap="small">
         <label htmlFor="title">عنوان</label>
         <input
           type="text"
-          value={installmentTypeValues.titleId}
+          value={selectedTitle.caption}
           name="caption"
           onChange={onChangeHandler}
         />
+        <input type="button" value="..." onClick={titleSelectHandler} />
       </Flex>
       <Flex gap="small">
         <label htmlFor="title">تعداد اقساط</label>

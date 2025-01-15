@@ -8,7 +8,7 @@ import Delete from '../delete/Delete'
 import '../../../App.css'
 import { topButtons } from '../../../helper/Styles/Person/List/style'
 
-function List({ installmentTypes , loading, searchHandler, searchText, setLoading, refreshPage, mainButtonHandler }) {
+function List({ installmentTypes  , loading, searchHandler, searchText, setLoading, refreshPage, mainButtonHandler }) {
   const [installmentTypeSelectedForEdit, setInstallmentTypeSelectedForEdit] = useState(null)
   const [installmentTypeSelectedForDelete, SetInstallmentTypeSelectedForDelete] = useState(null)
   const [addNewInstallmentType, setAddNewInstallmentType] = useState(false)
