@@ -11,13 +11,11 @@ import {
 } from "../../../helper/dataTypes/person/dataType";
 import { Button, Flex } from "antd";
 import { topButtons } from "../../../helper/Styles/Person/List/style";
-import List from "../list/List";
 import Select from "../../title/select/Select";
 
 function Add({ cancleAdd, refreshPage }: InstallmentTypeAddForm) {
-  const initTitle = { id: 0, caption: "" };
   const [installmentTypeValues, setInstallmentTypeValues] =
-    useState<InstallmentType>({ id: 0, count: 0, title: initTitle });
+    useState<InstallmentType>({ id: 0, count: 0, titleId: 0,title:'' });
 
   const [selectTitle, setSelectTitle] = useState(false);
   const [selectedTitle, setSelectedTitle] = useState({ id: 0, caption: "" });
@@ -25,11 +23,10 @@ function Add({ cancleAdd, refreshPage }: InstallmentTypeAddForm) {
   const titleSelectHandler = () => setSelectTitle(true);
   const AddInstallmentType = () => {
     let newInstallmentTypeValues = {
-      id: installmentTypeValues.id,
       count: installmentTypeValues.count,
-      titleId: installmentTypeValues.title.id,
-      createdAt:
+      titleId: selectedTitle.id,
     };
+    console.log(newInstallmentTypeValues);
 
     axios.post(INSTALLMENT_TYPE_URL, newInstallmentTypeValues).then((res) => {
       refreshPage();
@@ -38,13 +35,13 @@ function Add({ cancleAdd, refreshPage }: InstallmentTypeAddForm) {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     let name = e.target.name;
     let value = e.target.value;
-
+console.log('selectedTitle',selectedTitle);
 
     switch (name) {
       case "titleId":
         setInstallmentTypeValues({
           ...installmentTypeValues,
-          title: selectedTitle,
+          titleId: selectedTitle.id,
         });
         break;
       case "count":

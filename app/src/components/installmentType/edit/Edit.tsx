@@ -1,62 +1,76 @@
-import axios from 'axios'
-import { useState } from 'react'
-import { INSTALLMENT_TYPE_URL } from '../../../helper/constants/personColomns'
-import { InstallmentTypeEditForm } from '../../../helper/dataTypes/person/Edit/dataTypes'
-import { Button, Flex } from 'antd'
-import { topButtons } from '../../../helper/Styles/Person/List/style'
+import axios from "axios";
+import { useState } from "react";
+import { INSTALLMENT_TYPE_URL } from "../../../helper/constants/personColomns";
+import { InstallmentTypeEditForm } from "../../../helper/dataTypes/person/Edit/dataTypes";
+import { Button, Flex } from "antd";
+import { topButtons } from "../../../helper/Styles/Person/List/style";
+import Select from "../../title/select/Select";
 
-function Edit({ installmentType , cancleEdit, refreshPage } : InstallmentTypeEditForm) {
-  const [installmentTypeValues, setInstallmentTypeValues] = useState(installmentType)
+function Edit({
+  installmentType,
+  cancleEdit,
+  refreshPage,
+}: InstallmentTypeEditForm) {
+  // const [installmentTypeValues, setInstallmentTypeValues] =
+  //   useState(installmentType);
+  const [selectTitle, setSelectTitle] = useState(false);
+  const [selectedTitle, setSelectedTitle] = useState({titleId:installmentType.titleId, title: installmentType.title});
 
+  const titleSelectHandler = () => setSelectTitle(true);
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let name = e.target.name
-    let value = e.target.value
+    let name = e.target.name;
+    let value = e.target.value;
 
     switch (name) {
-      case 'titleId':
+      case "title":
         // setInstallmentTypeValues({ ...installmentTypeValues, titleId: parseInt(value) })
-        break
+        break;
       default:
-        break
+        break;
     }
-    console.log(installmentTypeValues)
-  }
+
+  };
   const updateInstallmentType = () => {
     let newTitleValues = {
-      id : installmentTypeValues.id,
-      title: installmentTypeValues.title,
-      count: installmentTypeValues.count,
-   
-    }
-    console.log(installmentTypeValues)
-    console.log(newTitleValues)
-    console.log(INSTALLMENT_TYPE_URL + '/' + installmentTypeValues.id)
-
+      id: installmentType.id,
+      titleId: installmentType.titleId,
+      count: installmentType.count,
+    };
     axios
-      .put(INSTALLMENT_TYPE_URL + '/' + installmentTypeValues.id, newTitleValues)
+      .put(
+        INSTALLMENT_TYPE_URL + "/" + installmentType.id,
+        newTitleValues
+      )
       .then((res) => {
         console.log(res);
-        
-        refreshPage()
-      })
-  }
-  return (
+
+        refreshPage();
+      });
+  };
+  return selectTitle ? (
+    <Select
+      titleSelectHandler={titleSelectHandler}
+      setSelectTitle={setSelectTitle}
+      setSelectedTitle={setSelectedTitle}
+    />
+  ) : (
     <Flex style={topButtons} vertical gap="middle">
       <Flex gap="small">
-        <label htmlFor='titleId'>عنوان</label>
+        <label htmlFor="titleId">عنوان</label>
         <input
-          type='text'
-          value={installmentTypeValues.title.id}
-          name='titleId'
+          type="text"
+          value={selectedTitle.title}
+          name="title"
           onChange={onChangeHandler}
         />
+          <input type="button" value="..." onClick={titleSelectHandler} />
       </Flex>
       <Flex gap="small">
-        <label htmlFor='titleId'>اقساط</label>
+        <label htmlFor="titleId">اقساط</label>
         <input
-          type='text'
-          value={installmentTypeValues.count}
-          name='count'
+          type="text"
+          value={installmentType.count}
+          name="count"
           onChange={onChangeHandler}
         />
       </Flex>
@@ -65,7 +79,7 @@ function Edit({ installmentType , cancleEdit, refreshPage } : InstallmentTypeEdi
         <Button onClick={updateInstallmentType}>تایید</Button>
       </Flex>
     </Flex>
-  )
+  );
 }
 
-export default Edit
+export default Edit;

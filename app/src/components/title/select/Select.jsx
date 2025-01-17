@@ -18,7 +18,7 @@ function Select({ titleSelectHandler, setSelectTitle, setSelectedTitle }) {
     const SelectedButtonName = name;
     let findtitle = titles.find((p) => p.id === SelectedButtonId);
     setSelectTitle(false);
-    setSelectedTitle(findtitle);
+    setSelectedTitle({ title: findtitle.title, titleId: findtitle.titleId });
   };
   const searchHandler = (input) => {
     let value = input.target.value;

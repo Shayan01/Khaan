@@ -108,7 +108,7 @@ function List({ titles , loading, searchHandler, searchText, setLoading, refresh
           searchText && titles
             ? titles.filter(
                 (p) =>
-                  (p.caption !== null && p.caption.includes(searchText)) 
+                  (p.title !== null && p.title.includes(searchText)) 
               )
             : titles
         }

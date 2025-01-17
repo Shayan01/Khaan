@@ -11,5 +11,6 @@ export interface Title {
 export interface InstallmentType {
   id: number;
   count: number;
-  title:Title ;
+  titleId: number;
+  title: string;
 }

@@ -13,8 +13,7 @@ namespace khaan.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-           
+                 
 
 
             new InitialData(modelBuilder).Seed();
