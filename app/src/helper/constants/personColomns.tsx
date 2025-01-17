@@ -51,8 +51,8 @@ export const InstallmentTypeColumns = [
   },
   {
     title: "عنوان",
-    dataIndex: "titleId",
-    key: "titleId",
+    dataIndex: "title.caption",
+    key: "titlecaption",
   },
   {
     title: "#",

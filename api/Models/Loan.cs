@@ -9,10 +9,10 @@ namespace khaan.Models
         public DateTime Date { get; set; }
         public DateTime FirstInstallmentDate { get; set; }
         public DateTime LastInstallmentDate { get; set; }
-        public required Title Title { get; set; }
-        public Person? Person { get; set; }
-        public required InstallmentType InstallmentType { get; set; }
-        public required Price Price { get; set; }
+        public required int TitleId { get; set; }
+        public int? PersonId { get; set; }
+        public required int InstallmentTypeId { get; set; }
+        public required int PriceId { get; set; }
 
         
     }

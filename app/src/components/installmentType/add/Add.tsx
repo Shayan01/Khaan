@@ -15,18 +15,20 @@ import List from "../list/List";
 import Select from "../../title/select/Select";
 
 function Add({ cancleAdd, refreshPage }: InstallmentTypeAddForm) {
+  const initTitle = { id: 0, caption: "" };
   const [installmentTypeValues, setInstallmentTypeValues] =
-    useState<InstallmentType>({ id: 0, count: 0, titleId: 0 });
+    useState<InstallmentType>({ id: 0, count: 0, title: initTitle });
 
   const [selectTitle, setSelectTitle] = useState(false);
-  const [selectedTitle, setSelectedTitle] = useState({id:0, caption : ''});
+  const [selectedTitle, setSelectedTitle] = useState({ id: 0, caption: "" });
 
   const titleSelectHandler = () => setSelectTitle(true);
-  const AddPerson = () => {
+  const AddInstallmentType = () => {
     let newInstallmentTypeValues = {
       id: installmentTypeValues.id,
       count: installmentTypeValues.count,
-      titleId: installmentTypeValues.titleId,
+      titleId: installmentTypeValues.title.id,
+      createdAt:
     };
 
     axios.post(INSTALLMENT_TYPE_URL, newInstallmentTypeValues).then((res) => {
@@ -37,11 +39,12 @@ function Add({ cancleAdd, refreshPage }: InstallmentTypeAddForm) {
     let name = e.target.name;
     let value = e.target.value;
 
+
     switch (name) {
       case "titleId":
         setInstallmentTypeValues({
           ...installmentTypeValues,
-          titleId: parseInt(value),
+          title: selectedTitle,
         });
         break;
       case "count":
@@ -55,7 +58,11 @@ function Add({ cancleAdd, refreshPage }: InstallmentTypeAddForm) {
     }
   };
   return selectTitle ? (
-    <Select titleSelectHandler={titleSelectHandler} setSelectTitle={setSelectTitle} setSelectedTitle = {setSelectedTitle} />
+    <Select
+      titleSelectHandler={titleSelectHandler}
+      setSelectTitle={setSelectTitle}
+      setSelectedTitle={setSelectedTitle}
+    />
   ) : (
     <Flex style={topButtons} vertical gap="middle">
       <Flex gap="small">
@@ -71,7 +78,7 @@ function Add({ cancleAdd, refreshPage }: InstallmentTypeAddForm) {
       <Flex gap="small">
         <label htmlFor="title">تعداد اقساط</label>
         <input
-          type="text"
+          type="number"
           value={installmentTypeValues.count}
           name="count"
           onChange={onChangeHandler}
@@ -80,7 +87,7 @@ function Add({ cancleAdd, refreshPage }: InstallmentTypeAddForm) {
 
       <Flex gap="small">
         <Button onClick={cancleAdd}>بازگشت</Button>
-        <Button onClick={AddPerson}>تایید</Button>
+        <Button onClick={AddInstallmentType}>تایید</Button>
       </Flex>
     </Flex>
   );

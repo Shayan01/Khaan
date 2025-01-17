@@ -12,7 +12,7 @@ function List({ installmentTypes  , loading, searchHandler, searchText, setLoadi
   const [installmentTypeSelectedForEdit, setInstallmentTypeSelectedForEdit] = useState(null)
   const [installmentTypeSelectedForDelete, SetInstallmentTypeSelectedForDelete] = useState(null)
   const [addNewInstallmentType, setAddNewInstallmentType] = useState(false)
-  // console.log('ListForm persons ', persons)
+  console.log('installmentTypes ', installmentTypes)
   // console.log('col ', columns)
 
  
@@ -29,13 +29,13 @@ function List({ installmentTypes  , loading, searchHandler, searchText, setLoadi
    
     let SelectedButtonId = id
     const SelectedButtonName = name
-    let findtitle  = installmentTypes.find((p) => p.id === SelectedButtonId)
+    let findInstallmentType  = installmentTypes.find((p) => p.id === SelectedButtonId)
     switch (SelectedButtonName) {
       case 'editButton':
-        setInstallmentTypeSelectedForEdit(findtitle)
+        setInstallmentTypeSelectedForEdit(findInstallmentType)
         break
       case 'deleteButton':
-        SetInstallmentTypeSelectedForDelete(findtitle)
+        SetInstallmentTypeSelectedForDelete(findInstallmentType)
         break
       default:
         break
@@ -108,7 +108,7 @@ function List({ installmentTypes  , loading, searchHandler, searchText, setLoadi
           searchText && installmentTypes
             ? installmentTypes.filter(
                 (p) =>
-                  (p.caption !== null && p.caption.includes(searchText)) 
+                  (p.title.caption !== null && p.title.caption.includes(searchText)) 
               )
             : installmentTypes
         }

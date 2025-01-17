@@ -26,12 +26,13 @@ namespace company.Controllers
         public InstallmentType Get(int id)
         {
             InstallmentType? installmentType = _khaanContext.InstallmentTypes.FirstOrDefault(t => t.Id == id);
-            return installmentType is null ? new InstallmentType { Title = null ,Id = -1 } : installmentType;
+            return installmentType is null ? new InstallmentType { TitleId = 0 ,Id = -1 } : installmentType;
 
         }
         [HttpPost]
         public void Post([FromBody] InstallmentType installmentType)
         {
+            
             _khaanContext.InstallmentTypes.Add(installmentType);
             _khaanContext.SaveChanges();
         }
@@ -42,7 +43,7 @@ namespace company.Controllers
             if (searchInstallmentType is not null)
             {
                 searchInstallmentType.Id = installmentType.Id;
-                searchInstallmentType.Title = installmentType.Title;
+                searchInstallmentType.TitleId = installmentType.TitleId;
                 _khaanContext.SaveChanges();
             }
         }

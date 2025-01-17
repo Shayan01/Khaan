@@ -14,7 +14,7 @@ function Edit({ installmentType , cancleEdit, refreshPage } : InstallmentTypeEdi
 
     switch (name) {
       case 'titleId':
-        setInstallmentTypeValues({ ...installmentTypeValues, titleId: parseInt(value) })
+        // setInstallmentTypeValues({ ...installmentTypeValues, titleId: parseInt(value) })
         break
       default:
         break
@@ -24,7 +24,7 @@ function Edit({ installmentType , cancleEdit, refreshPage } : InstallmentTypeEdi
   const updateInstallmentType = () => {
     let newTitleValues = {
       id : installmentTypeValues.id,
-      titleId: installmentTypeValues.titleId,
+      title: installmentTypeValues.title,
       count: installmentTypeValues.count,
    
     }
@@ -46,7 +46,7 @@ function Edit({ installmentType , cancleEdit, refreshPage } : InstallmentTypeEdi
         <label htmlFor='titleId'>عنوان</label>
         <input
           type='text'
-          value={installmentTypeValues.titleId}
+          value={installmentTypeValues.title.id}
           name='titleId'
           onChange={onChangeHandler}
         />

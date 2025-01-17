@@ -14,35 +14,7 @@ namespace khaan.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Loan>()
-            .HasOne(l => l.InstallmentType);
-
-            modelBuilder.Entity<Loan>()
-            .HasOne(l => l.Person);
-
-            modelBuilder.Entity<Loan>()
-            .HasOne(l => l.Title);
-
-            modelBuilder.Entity<Loan>()
-            .HasOne(l => l.Price);
-
-            modelBuilder.Entity<Pay>()
-            .HasOne(p => p.Loan);
-            modelBuilder.Entity<InstallmentType>()
-            .HasOne(i => i.Title);
-            modelBuilder.Entity<Pay>()
-            .HasOne(p => p.Person);
-            modelBuilder.Entity<Pay>()
-            .HasOne(p => p.Price);
-            modelBuilder.Entity<Pay>()
-            .HasOne(p => p.Status);
-             modelBuilder.Entity<Price>()
-            .HasOne(p => p.Title);
-            
-modelBuilder.Entity<Status>()
-    .HasOne(s => s.Title)
-    .WithMany() 
-    .HasForeignKey(s => s.TitleId); 
+           
 
 
             new InitialData(modelBuilder).Seed();

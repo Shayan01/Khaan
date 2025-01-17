@@ -20,7 +20,7 @@ function Delete({ installmentType, cancleDelete , refreshPage}:InstallmentTypeDe
         <label htmlFor='titleId'>عنوان</label>
         <input
           type='text'
-          value={installmentType.titleId}
+          // value={installmentType.titleId}
           name='firstName'
           readOnly={true}
         />

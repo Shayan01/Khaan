@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using khaan.Context;
 
@@ -10,9 +11,11 @@ using khaan.Context;
 namespace company.Migrations
 {
     [DbContext(typeof(KhaanContext))]
-    partial class KhaanContextModelSnapshot : ModelSnapshot
+    [Migration("20250116091103_work on models")]
+    partial class workonmodels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");

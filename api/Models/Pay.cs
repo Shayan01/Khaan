@@ -8,9 +8,9 @@ namespace khaan.Models
         public required DateTime Date { get; set; }
         public required DateTime InstallmentDate { get; set; }
         public required string? TraceNumber { get; set; }
-        public required Price Price { get; set; }
-        public required Loan? Loan { get; set; }
-        public required Person Person { get; set; }
-        public required Status Status { get; set; }
+        public required int PriceId { get; set; }
+        public required int? LoanId { get; set; }
+        public required int PersonId { get; set; }
+        public required int StatusId { get; set; }
     }
 }
