@@ -15,7 +15,7 @@ import Select from "../../title/select/Select";
 
 function Add({ cancleAdd, refreshPage }: InstallmentTypeAddForm) {
   const [installmentTypeValues, setInstallmentTypeValues] =
-    useState<InstallmentType>({ id: 0, count: 0, titleId: 0,title:'' });
+    useState<InstallmentType>({ id: 0, count: 0, titleId: 0, title: "" });
 
   const [selectTitle, setSelectTitle] = useState(false);
   const [selectedTitle, setSelectedTitle] = useState({ id: 0, caption: "" });
@@ -35,7 +35,7 @@ function Add({ cancleAdd, refreshPage }: InstallmentTypeAddForm) {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     let name = e.target.name;
     let value = e.target.value;
-console.log('selectedTitle',selectedTitle);
+    console.log("selectedTitle", selectedTitle);
 
     switch (name) {
       case "titleId":
@@ -56,7 +56,6 @@ console.log('selectedTitle',selectedTitle);
   };
   return selectTitle ? (
     <Select
-      titleSelectHandler={titleSelectHandler}
       setSelectTitle={setSelectTitle}
       setSelectedTitle={setSelectedTitle}
     />

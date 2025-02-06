@@ -16,6 +16,8 @@ function Titles({mainButtonHandler}) {
     window.location.reload()
   }
   const searchHandler = (input) => {
+  
+    
     let value = input.target.value
     setSearchText(value)
   }

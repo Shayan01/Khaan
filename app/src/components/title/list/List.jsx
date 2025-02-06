@@ -12,10 +12,9 @@ function List({ titles , loading, searchHandler, searchText, setLoading, refresh
   const [titleSelectedForEdit, setTitleSelectedForEdit] = useState(null)
   const [tileSelectedForDelete, setTitleSelectedForDelete] = useState(null)
   const [addNewTitle, setAddNewTitle] = useState(false)
-  // console.log('ListForm persons ', persons)
-  // console.log('col ', columns)
+  // console.log('titles', titles)
+  // console.log('searchText ', searchText)
 
- 
   const cancleEdit = () => {
     setTitleSelectedForEdit(null);
    }
@@ -108,7 +107,7 @@ function List({ titles , loading, searchHandler, searchText, setLoading, refresh
           searchText && titles
             ? titles.filter(
                 (p) =>
-                  (p.title !== null && p.title.includes(searchText)) 
+                  (p.caption !== null && p.caption.includes(searchText)) 
               )
             : titles
         }

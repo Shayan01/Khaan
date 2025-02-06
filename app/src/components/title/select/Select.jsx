@@ -8,17 +8,19 @@ import { topButtons } from "../../../helper/Styles/Person/List/style";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function Select({ titleSelectHandler, setSelectTitle, setSelectedTitle }) {
+function Select({ setSelectTitle, setSelectedTitle }) {
   const [titles, setTitles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
 
   const buttonClick = (id, name) => {
     let SelectedButtonId = id;
-    const SelectedButtonName = name;
     let findtitle = titles.find((p) => p.id === SelectedButtonId);
+    console.log('titles',titles);
+    
+    setSelectedTitle({ caption: findtitle.caption, id: findtitle.id });
     setSelectTitle(false);
-    setSelectedTitle({ title: findtitle.title, titleId: findtitle.titleId });
+   
   };
   const searchHandler = (input) => {
     let value = input.target.value;

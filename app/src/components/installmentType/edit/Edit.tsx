@@ -49,7 +49,6 @@ function Edit({
   };
   return selectTitle ? (
     <Select
-      titleSelectHandler={titleSelectHandler}
       setSelectTitle={setSelectTitle}
       setSelectedTitle={setSelectedTitle}
     />
