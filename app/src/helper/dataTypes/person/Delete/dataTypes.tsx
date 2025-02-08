@@ -1,4 +1,4 @@
-import { Person, Title, InstallmentType } from "../dataType";
+import { Person, Title, InstallmentType,Price, Status } from "../dataType";
 export interface PersonDeleteForm {
   person: Person;
   cancleDelete: () => void;
@@ -11,6 +11,16 @@ export interface TitleDeleteForm {
 }
 export interface InstallmentTypeDeleteForm {
   installmentType: InstallmentType;
+  cancleDelete: () => void;
+  refreshPage: () => void;
+}
+export interface PricesDeleteForm {
+  prices: Price;
+  cancleDelete: () => void;
+  refreshPage: () => void;
+}
+export interface StatusDeleteForm {
+  status: Status;
   cancleDelete: () => void;
   refreshPage: () => void;
 }

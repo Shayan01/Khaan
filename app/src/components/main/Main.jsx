@@ -4,6 +4,8 @@ import { Button, Flex } from "antd";
 import Persons from "../persons/container/Persons";
 import Titles from "../title/container/Titles";
 import InstallmentTypes from "../installmentType/container/installmentTypes";
+import Prices from "../Price/container/prices";
+import Statuses from "../status/container/statuses";
 
 
 function Main() {
@@ -18,7 +20,11 @@ function Main() {
     window.location.reload();
   };
 
-  return page === "persons" ? (
+  return page === "Statuses" ? (
+    <Statuses mainButtonHandler={mainButtonHandler} />
+  ) : page === "Prices" ? (
+    <Prices mainButtonHandler={mainButtonHandler} />
+  ) : page === "persons" ? (
     <Persons mainButtonHandler={mainButtonHandler} />
   ) : page === "titles" ? (
     <Titles mainButtonHandler={mainButtonHandler} />
@@ -49,6 +55,22 @@ function Main() {
         onClick={() => mainButtonHandler("InstallmentTypes")}
       >
         اقساط
+      </Button>
+      <Button
+        type="primary"
+        variant="solid"
+        name="Prices"
+        onClick={() => mainButtonHandler("Prices")}
+      >
+        مبالغ
+      </Button>
+      <Button
+        type="primary"
+        variant="solid"
+        name="Statuses"
+        onClick={() => mainButtonHandler("Statuses")}
+      >
+        وضعیت ها
       </Button>
     </Flex>
   );

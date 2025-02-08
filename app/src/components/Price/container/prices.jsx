@@ -1,0 +1,53 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import {
+  PRICE_URL,
+  TITLE_URL,
+} from "../../../helper/constants/personColomns";
+import "../../../App.css";
+
+import List from "../list/List";
+import { Flex } from "antd";
+
+function Prices({ mainButtonHandler }) {
+  const [prices, setPrices] = useState([]);
+  const [titles, setTitles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchText, setSearchText] = useState("");
+
+  const refreshPage = () => {
+    window.location.reload();
+  };
+  const searchHandler = (input) => {
+    let value = input.target.value;
+    setSearchText(value);
+  };
+  useEffect(() => {
+    axios.get(PRICE_URL).then((res) => {
+      setPrices(res.data);
+    });
+    axios.get(TITLE_URL).then((res) => {
+      setTitles(res.data);
+    });
+    setLoading(false);
+  }, []);
+
+  return loading ? (
+    <div>Loading...</div>
+  ) : (
+    <Flex style={{ margin: "0 2%" }} vertical>
+      <List
+        mainButtonHandler={mainButtonHandler}
+        titles={titles}
+        prices={prices}
+        loading={loading}
+        searchText={searchText}
+        searchHandler={searchHandler}
+        setLoading={setLoading}
+        refreshPage={refreshPage}
+      />
+    </Flex>
+  );
+}
+
+export default Prices;

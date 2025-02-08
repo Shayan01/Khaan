@@ -13,7 +13,10 @@ namespace khaan.Models
         public int? PersonId { get; set; }
         public required int InstallmentTypeId { get; set; }
         public required int PriceId { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
 
-        
+
     }
 }

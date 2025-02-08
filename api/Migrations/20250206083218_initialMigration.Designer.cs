@@ -8,11 +8,11 @@ using khaan.Context;
 
 #nullable disable
 
-namespace company.Migrations
+namespace khaan.Migrations
 {
     [DbContext(typeof(KhaanContext))]
-    [Migration("20241029145311_workOnPersonTable")]
-    partial class workOnPersonTable
+    [Migration("20250206083218_initialMigration")]
+    partial class initialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,6 +29,18 @@ namespace company.Migrations
                     b.Property<byte>("Count")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TitleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("InstallmentTypes");
@@ -40,23 +52,40 @@ namespace company.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Amount")
+                    b.Property<int>("Code")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("InstallmentTypeId")
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("FirstInstallmentDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("InstallmentTypeId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("LastInstallmentDate")
+                        .HasColumnType("TEXT");
 
                     b.Property<int?>("PersonId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("PriceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TitleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
-
-                    b.HasIndex("InstallmentTypeId");
-
-                    b.HasIndex("PersonId");
 
                     b.ToTable("Loans");
                 });
@@ -67,23 +96,43 @@ namespace company.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Amount")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("InstallmentDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<int?>("LoanId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("PersonId")
+                    b.Property<int>("PersonId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("PriceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ReceiptId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Score")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TraceNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
-
-                    b.HasIndex("LoanId");
-
-                    b.HasIndex("PersonId");
 
                     b.ToTable("Pays");
                 });
@@ -154,34 +203,53 @@ namespace company.Migrations
                         });
                 });
 
-            modelBuilder.Entity("khaan.Models.Loan", b =>
+            modelBuilder.Entity("khaan.Models.Price", b =>
                 {
-                    b.HasOne("khaan.Models.InstallmentType", "InstallmentType")
-                        .WithMany()
-                        .HasForeignKey("InstallmentTypeId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.HasOne("khaan.Models.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId");
+                    b.Property<string>("Amount")
+                        .HasColumnType("TEXT");
 
-                    b.Navigation("InstallmentType");
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
 
-                    b.Navigation("Person");
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TitleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Prices");
                 });
 
-            modelBuilder.Entity("khaan.Models.Pay", b =>
+            modelBuilder.Entity("khaan.Models.Title", b =>
                 {
-                    b.HasOne("khaan.Models.Loan", "Loan")
-                        .WithMany()
-                        .HasForeignKey("LoanId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.HasOne("khaan.Models.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId");
+                    b.Property<string>("Caption")
+                        .HasColumnType("TEXT");
 
-                    b.Navigation("Loan");
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
 
-                    b.Navigation("Person");
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Titles");
                 });
 #pragma warning restore 612, 618
         }

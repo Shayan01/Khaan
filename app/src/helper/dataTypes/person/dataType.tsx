@@ -14,3 +14,14 @@ export interface InstallmentType {
   titleId: number;
   title: string;
 }
+
+export interface Price {
+  id: number;
+  titleId: number;
+  amount: string;
+}
+export interface Status {
+  id: number;
+  titleId: number;
+  title: string;
+}

@@ -12,5 +12,8 @@ namespace khaan.Models
         public required int? LoanId { get; set; }
         public required int PersonId { get; set; }
         public required int StatusId { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
     }
 }

@@ -13,9 +13,6 @@ namespace khaan.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-                 
-
-
             new InitialData(modelBuilder).Seed();
         }
         public DbSet<Title> Titles { get; set; }
@@ -23,7 +20,8 @@ namespace khaan.Context
         public DbSet<Loan> Loans { get; set; }
         public DbSet<Pay> Pays { get; set; }
         public DbSet<InstallmentType> InstallmentTypes { get; set; }
-
+        public DbSet<Price> Prices { get; set; }
+        public DbSet<Status> Status { get; set; }
 
     }
 }

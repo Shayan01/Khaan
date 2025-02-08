@@ -7,7 +7,7 @@ using khaan.Context;
 
 #nullable disable
 
-namespace company.Migrations
+namespace khaan.Migrations
 {
     [DbContext(typeof(KhaanContext))]
     partial class KhaanContextModelSnapshot : ModelSnapshot
@@ -52,7 +52,13 @@ namespace company.Migrations
                     b.Property<int>("Code")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("FirstInstallmentDate")
@@ -73,6 +79,9 @@ namespace company.Migrations
                     b.Property<int>("TitleId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Loans");
@@ -84,7 +93,13 @@ namespace company.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("InstallmentDate")
@@ -109,6 +124,9 @@ namespace company.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("TraceNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -180,6 +198,32 @@ namespace company.Migrations
                             FirstName = "emp5",
                             Phone = "5"
                         });
+                });
+
+            modelBuilder.Entity("khaan.Models.Price", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Amount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TitleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Prices");
                 });
 
             modelBuilder.Entity("khaan.Models.Title", b =>
