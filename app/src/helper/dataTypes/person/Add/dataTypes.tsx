@@ -18,3 +18,7 @@ export interface StatusAddForm{
     cancleAdd : ()=> void
     refreshPage : ()=> void
 }
+export interface PayAddForm{
+    cancleAdd : ()=> void
+    refreshPage : ()=> void
+}

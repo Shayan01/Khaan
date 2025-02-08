@@ -6,7 +6,7 @@ import Titles from "../title/container/Titles";
 import InstallmentTypes from "../installmentType/container/installmentTypes";
 import Prices from "../Price/container/prices";
 import Statuses from "../status/container/statuses";
-
+import Pays from "../pay/container/pays";
 
 function Main() {
   const [page, setPage] = useState("");
@@ -20,7 +20,9 @@ function Main() {
     window.location.reload();
   };
 
-  return page === "Statuses" ? (
+  return page === "Pays" ? (
+    <Pays mainButtonHandler={mainButtonHandler} />
+  ) : page === "Statuses" ? (
     <Statuses mainButtonHandler={mainButtonHandler} />
   ) : page === "Prices" ? (
     <Prices mainButtonHandler={mainButtonHandler} />
@@ -71,6 +73,14 @@ function Main() {
         onClick={() => mainButtonHandler("Statuses")}
       >
         وضعیت ها
+      </Button>
+      <Button
+        type="primary"
+        variant="solid"
+        name="Pays"
+        onClick={() => mainButtonHandler("Pays")}
+      >
+        پرداخت ها
       </Button>
     </Flex>
   );

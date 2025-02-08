@@ -25,3 +25,15 @@ export interface Status {
   titleId: number;
   title: string;
 }
+export interface Pay {
+  id: number;
+  score: number;
+  receiptId: number;
+  date: string;
+  installmentDate: string;
+  traceNumber:number;
+  priceId:number;
+  loanId:number;
+  personId:number;
+  statusId:number;
+}

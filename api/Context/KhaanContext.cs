@@ -21,7 +21,7 @@ namespace khaan.Context
         public DbSet<Pay> Pays { get; set; }
         public DbSet<InstallmentType> InstallmentTypes { get; set; }
         public DbSet<Price> Prices { get; set; }
-        public DbSet<Status> Status { get; set; }
+        public DbSet<Status> Statuses { get; set; }
 
     }
 }

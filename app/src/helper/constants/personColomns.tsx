@@ -97,3 +97,4 @@ export const TITLE_URL = `${BASE_URL}Title`;
 export const INSTALLMENT_TYPE_URL = `${BASE_URL}InstallmentType`;
 export const PRICE_URL = `${BASE_URL}Price`;
 export const STATUS_URL = `${BASE_URL}Status`;
+export const PAY_URL = `${BASE_URL}Pay`;
