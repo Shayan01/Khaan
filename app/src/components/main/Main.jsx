@@ -7,6 +7,7 @@ import InstallmentTypes from "../installmentType/container/installmentTypes";
 import Prices from "../Price/container/prices";
 import Statuses from "../status/container/statuses";
 import Pays from "../pay/container/pays";
+import Loans from "../loan/container/loans";
 
 function Main() {
   const [page, setPage] = useState("");
@@ -20,7 +21,9 @@ function Main() {
     window.location.reload();
   };
 
-  return page === "Pays" ? (
+  return page === "Loans" ? (
+    <Loans mainButtonHandler={mainButtonHandler} />
+  ) : page === "Pays" ? (
     <Pays mainButtonHandler={mainButtonHandler} />
   ) : page === "Statuses" ? (
     <Statuses mainButtonHandler={mainButtonHandler} />
@@ -81,6 +84,14 @@ function Main() {
         onClick={() => mainButtonHandler("Pays")}
       >
         پرداخت ها
+      </Button>
+       <Button
+        type="primary"
+        variant="solid"
+        name="Loans"
+        onClick={() => mainButtonHandler("Loans")}
+      >
+        وام
       </Button>
     </Flex>
   );

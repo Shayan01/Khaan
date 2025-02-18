@@ -22,3 +22,7 @@ export interface PayAddForm{
     cancleAdd : ()=> void
     refreshPage : ()=> void
 }
+export interface LoanAddForm{
+    cancleAdd : ()=> void
+    refreshPage : ()=> void
+}

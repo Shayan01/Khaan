@@ -1,4 +1,12 @@
-import { Person, Title, InstallmentType,Price, Status, Pay } from "../dataType";
+import {
+  Person,
+  Title,
+  InstallmentType,
+  Price,
+  Status,
+  Pay,
+  LoanType,
+} from "../dataType";
 export interface PersonDeleteForm {
   person: Person;
   cancleDelete: () => void;
@@ -26,6 +34,11 @@ export interface StatusDeleteForm {
 }
 export interface PayDeleteForm {
   pay: Pay;
+  cancleDelete: () => void;
+  refreshPage: () => void;
+}
+export interface LoanDeleteForm {
+  loan: LoanType;
   cancleDelete: () => void;
   refreshPage: () => void;
 }

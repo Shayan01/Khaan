@@ -14,6 +14,18 @@ export interface InstallmentType {
   titleId: number;
   title: string;
 }
+export interface LoanType {
+  id: number;
+  code: number;
+  date: string;
+  firstInstallmentDate: string;
+  lastInstallmentDate: string;
+  title: string;
+  titleId: number;
+  personId: number;
+  installmentTypeId: number;
+  priceId: number;
+}
 
 export interface Price {
   id: number;
