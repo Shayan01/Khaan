@@ -30,6 +30,7 @@ export interface LoanType {
 export interface Price {
   id: number;
   titleId: number;
+  title: string;
   amount: string;
 }
 export interface Status {

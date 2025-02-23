@@ -44,6 +44,7 @@ namespace company.Controllers
             {
                 searchInstallmentType.Id = installmentType.Id;
                 searchInstallmentType.TitleId = installmentType.TitleId;
+                searchInstallmentType.Count = installmentType.Count;
                 _khaanContext.SaveChanges();
             }
         }

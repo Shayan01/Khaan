@@ -44,6 +44,7 @@ namespace company.Controllers
             {
                 searchPrice.Id = price.Id;
                 searchPrice.TitleId = price.TitleId;
+                searchPrice.Amount = price.Amount;
                 _khaanContext.SaveChanges();
             }
         }

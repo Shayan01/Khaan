@@ -20,7 +20,6 @@ function Edit({ title , cancleEdit, refreshPage } : TitleEditForm) {
       default:
         break
     }
-    console.log(titleValues)
   }
   const updateTitle = () => {
     let newTitleValues = {
@@ -28,15 +27,11 @@ function Edit({ title , cancleEdit, refreshPage } : TitleEditForm) {
       caption: titleValues.caption,
    
     }
-    console.log(titleValues)
-    console.log(newTitleValues)
-    console.log(TITLE_URL + '/' + titleValues.id)
+ 
 
     axios
       .put(TITLE_URL + '/' + titleValues.id, newTitleValues)
-      .then((res) => {
-        console.log(res);
-        
+      .then((res) => {     
         refreshPage()
       })
   }

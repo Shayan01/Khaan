@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { INSTALLMENT_TYPE_URL } from "../../../helper/constants/personColomns";
 import { InstallmentTypeEditForm } from "../../../helper/dataTypes/person/Edit/dataTypes";
 import { Button, Flex } from "antd";
@@ -11,39 +11,46 @@ function Edit({
   cancleEdit,
   refreshPage,
 }: InstallmentTypeEditForm) {
-  // const [installmentTypeValues, setInstallmentTypeValues] =
-  //   useState(installmentType);
+  const [installmentTypeValues, setInstallmentTypeValues] = useState({
+    id: installmentType.id,
+    count: installmentType.count,
+    titleId: installmentType.titleId,
+  });
   const [selectTitle, setSelectTitle] = useState(false);
-  const [selectedTitle, setSelectedTitle] = useState({titleId:installmentType.titleId, title: installmentType.title});
-
+  const [selectedTitle, setSelectedTitle] = useState({
+    id: installmentType.titleId,
+    caption: installmentType.title,
+  });
+  // useEffect(() => {
+  //   console.log(installmentTypeValues.count);
+  // }, [installmentTypeValues]);
   const titleSelectHandler = () => setSelectTitle(true);
+
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     let name = e.target.name;
-    let value = e.target.value;
-
-    switch (name) {
-      case "title":
-        // setInstallmentTypeValues({ ...installmentTypeValues, titleId: parseInt(value) })
+      switch (name) {
+      case "count":
+        setInstallmentTypeValues({
+          ...installmentTypeValues,
+          count: parseInt(e.target.value),
+        });
         break;
       default:
         break;
     }
-
   };
   const updateInstallmentType = () => {
     let newTitleValues = {
-      id: installmentType.id,
-      titleId: installmentType.titleId,
-      count: installmentType.count,
+      id: installmentTypeValues.id,
+      titleId: selectedTitle.id,
+      count: installmentTypeValues.count,
     };
+    console.log(INSTALLMENT_TYPE_URL + "/" + newTitleValues.id);
+    console.log(newTitleValues);
+    
     axios
-      .put(
-        INSTALLMENT_TYPE_URL + "/" + installmentType.id,
-        newTitleValues
-      )
+      .put(INSTALLMENT_TYPE_URL + "/" + newTitleValues.id, newTitleValues)
       .then((res) => {
-        console.log(res);
-
         refreshPage();
       });
   };
@@ -58,17 +65,17 @@ function Edit({
         <label htmlFor="titleId">عنوان</label>
         <input
           type="text"
-          value={selectedTitle.title}
+          value={selectedTitle.caption}
           name="title"
           onChange={onChangeHandler}
         />
-          <input type="button" value="..." onClick={titleSelectHandler} />
+        <input type="button" value="..." onClick={titleSelectHandler} />
       </Flex>
       <Flex gap="small">
         <label htmlFor="titleId">اقساط</label>
         <input
           type="text"
-          value={installmentType.count}
+          value={installmentTypeValues.count}
           name="count"
           onChange={onChangeHandler}
         />

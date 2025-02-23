@@ -23,7 +23,7 @@ export interface InstallmentTypeDeleteForm {
   refreshPage: () => void;
 }
 export interface PricesDeleteForm {
-  prices: Price;
+  price: Price;
   cancleDelete: () => void;
   refreshPage: () => void;
 }

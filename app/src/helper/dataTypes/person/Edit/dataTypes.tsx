@@ -16,7 +16,7 @@ export interface InstallmentTypeEditForm {
   refreshPage: () => void;
 }
 export interface PriceEditForm {
-  price: Price;
+   price: Price;
   cancleEdit: () => void;
   refreshPage: () => void;
 }

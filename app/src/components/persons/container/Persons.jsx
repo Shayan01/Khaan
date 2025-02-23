@@ -13,7 +13,7 @@ function Persons({mainButtonHandler}) {
 
 
   const refreshPage = () => {
-    window.location.reload()
+    setLoading(true)
   }
   const searchHandler = (input) => {
     let value = input.target.value
@@ -27,7 +27,7 @@ function Persons({mainButtonHandler}) {
         setLoading(false)
       })
     },
-    []
+    [loading]
   )
 
   return loading ? (

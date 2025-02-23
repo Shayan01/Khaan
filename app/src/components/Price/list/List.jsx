@@ -22,7 +22,7 @@ function List({
     useState(null);
   const [
     priceSelectedForDelete,
-    SetPriceSelectedForDelete,
+    setPriceSelectedForDelete,
   ] = useState(null);
   const [addNewPrice, setAddNewPrice] = useState(false);
 
@@ -30,7 +30,7 @@ function List({
     setPriceSelectedForEdit(null);
   };
   const cancleDelete = () => {
-    priceSelectedForDelete(null);
+    setPriceSelectedForDelete(null);
   };
   const cancleAdd = () => setAddNewPrice(false);
 
@@ -40,13 +40,13 @@ function List({
     let findPrice = prices.find(
       (p) => p.id === SelectedButtonId
     );
-    
+    findPrice.title  = titles.find(t => t.id === findPrice.titleId).caption
     switch (SelectedButtonName) {
       case "editButton":
         setPriceSelectedForEdit(findPrice);
         break;
       case "deleteButton":
-        SetPriceSelectedForDelete(findPrice);
+        setPriceSelectedForDelete(findPrice);
         break;
       default:
         break;
@@ -85,13 +85,13 @@ function List({
   );
   return priceSelectedForEdit != null ? (
     <Edit
-      installmentType={priceSelectedForEdit}
+    price={priceSelectedForEdit}
       cancleEdit={cancleEdit}
       refreshPage={refreshPage}
     />
   ) : priceSelectedForDelete != null ? (
     <Delete
-      installmentType={priceSelectedForDelete}
+    price={priceSelectedForDelete}
       cancleDelete={cancleDelete}
       setLoading={setLoading}
       refreshPage={refreshPage}

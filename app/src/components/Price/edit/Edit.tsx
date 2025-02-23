@@ -6,15 +6,15 @@ import { Button, Flex } from "antd";
 import { topButtons } from "../../../helper/Styles/Person/List/style";
 import Select from "../../title/select/Select";
 
-function Edit({
-  price,
-  cancleEdit,
-  refreshPage,
-}: PriceEditForm) {
-  // const [installmentTypeValues, setInstallmentTypeValues] =
-  //   useState(installmentType);
+function Edit({ price, cancleEdit, refreshPage }: PriceEditForm) {
+  const [priceValues, setPriceValues] =
+    useState(price);
   const [selectTitle, setSelectTitle] = useState(false);
-  const [selectedTitle, setSelectedTitle] = useState({titleId:price.titleId, amount: price.amount});
+  const [selectedTitle, setSelectedTitle] = useState({
+    id: price.titleId,
+    caption: price.title,
+  
+  });
 
   const titleSelectHandler = () => setSelectTitle(true);
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,29 +23,24 @@ function Edit({
 
     switch (name) {
       case "title":
-        // setInstallmentTypeValues({ ...installmentTypeValues, titleId: parseInt(value) })
+        setPriceValues({ ...priceValues, titleId: selectedTitle.id })
+        break;
+        case "price":
+        setPriceValues({ ...priceValues, amount: e.target.value })
         break;
       default:
         break;
     }
-
   };
   const updatePrice = () => {
     let newTitleValues = {
-      id: price.id,
-      titleId: price.titleId,
-      amount: price.amount,
+      id: priceValues.id,
+      titleId: selectedTitle.id,
+      amount: priceValues.amount,
     };
-    axios
-      .put(
-        PRICE_URL + "/" + price.id,
-        newTitleValues
-      )
-      .then((res) => {
-        console.log(res);
-
-        refreshPage();
-      });
+    axios.put(PRICE_URL + "/" + price.id, newTitleValues).then((res) => {
+      refreshPage();
+    });
   };
   return selectTitle ? (
     <Select
@@ -58,18 +53,18 @@ function Edit({
         <label htmlFor="titleId">عنوان</label>
         <input
           type="text"
-          value={selectedTitle.amount}
+          value={selectedTitle.caption}
           name="title"
           onChange={onChangeHandler}
         />
-          <input type="button" value="..." onClick={titleSelectHandler} />
+        <input type="button" value="..." onClick={titleSelectHandler} />
       </Flex>
       <Flex gap="small">
         <label htmlFor="titleId">مبلغ</label>
         <input
           type="text"
-          value={price.amount}
-          name="count"
+          value={priceValues.amount}
+          name="price"
           onChange={onChangeHandler}
         />
       </Flex>

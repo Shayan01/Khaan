@@ -4,11 +4,11 @@ import { PricesDeleteForm } from '../../../helper/dataTypes/person/Delete/dataTy
 import { Button, Flex } from 'antd'
 import { topButtons } from '../../../helper/Styles/Person/List/style'
 
-function Delete({ prices, cancleDelete , refreshPage}:PricesDeleteForm ) {
+function Delete({ price, cancleDelete , refreshPage}:PricesDeleteForm ) {
 
 
   const DeletePrice = () => {
-    axios.delete(PRICE_URL + '/' + prices.id).then((res) => {
+    axios.delete(PRICE_URL + '/' + price.id).then((res) => {
       console.log(res);
       
       refreshPage();
@@ -20,7 +20,7 @@ function Delete({ prices, cancleDelete , refreshPage}:PricesDeleteForm ) {
         <label htmlFor='titleId'>عنوان</label>
         <input
           type='text'
-          // value={installmentType.titleId}
+          value={price.title}
           name='firstName'
           readOnly={true}
         />

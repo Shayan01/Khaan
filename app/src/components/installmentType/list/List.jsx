@@ -22,7 +22,7 @@ function List({
     useState(null);
   const [
     installmentTypeSelectedForDelete,
-    SetInstallmentTypeSelectedForDelete,
+    setInstallmentTypeSelectedForDelete,
   ] = useState(null);
   const [addNewInstallmentType, setAddNewInstallmentType] = useState(false);
   console.log("installmentTypes ", installmentTypes);
@@ -32,7 +32,7 @@ function List({
     setInstallmentTypeSelectedForEdit(null);
   };
   const cancleDelete = () => {
-    installmentTypeSelectedForDelete(null);
+    setInstallmentTypeSelectedForDelete(null);
   };
   const cancleAdd = () => setAddNewInstallmentType(false);
 
@@ -49,7 +49,7 @@ function List({
         setInstallmentTypeSelectedForEdit(findInstallmentType);
         break;
       case "deleteButton":
-        SetInstallmentTypeSelectedForDelete(findInstallmentType);
+        setInstallmentTypeSelectedForDelete(findInstallmentType);
         break;
       default:
         break;

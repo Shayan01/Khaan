@@ -13,7 +13,7 @@ function Titles({mainButtonHandler}) {
 
 
   const refreshPage = () => {
-    window.location.reload()
+    setLoading(true)
   }
   const searchHandler = (input) => {
   
@@ -29,7 +29,7 @@ function Titles({mainButtonHandler}) {
         setLoading(false)
       })
     },
-    []
+    [loading]
   )
 
   return loading ? (
