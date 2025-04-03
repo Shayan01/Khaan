@@ -6,7 +6,13 @@ import { Pay, Title } from "../../../helper/dataTypes/person/dataType";
 import { Button, Flex } from "antd";
 import { topButtons } from "../../../helper/Styles/Person/List/style";
 import Select from "../../title/select/Select";
-
+import {
+  Calendar,
+  DatePicker,
+  JalaliLocaleListener,
+} from "@realmodule/antd-jalali";
+import { ConfigProvider } from "antd";
+import fa_IR from "antd/lib/locale/fa_IR";
 function Add({ cancleAdd, refreshPage }: PayAddForm) {
   const [payValues, setPayValues] = useState<Pay>({
     id: 0,
@@ -21,6 +27,7 @@ function Add({ cancleAdd, refreshPage }: PayAddForm) {
     statusId: 0,
   });
 
+  const [selectDate, setselectDate] = useState(null);
   const [selectPrice, setSelectPrice] = useState(false);
   const [selectedPrice, setSelectedPrice] = useState({
     id: 0,
@@ -98,7 +105,7 @@ function Add({ cancleAdd, refreshPage }: PayAddForm) {
           personId: parseInt(value),
         });
         break;
-        case "statusId":
+      case "statusId":
         setPayValues({
           ...payValues,
           statusId: parseInt(value),
@@ -108,6 +115,7 @@ function Add({ cancleAdd, refreshPage }: PayAddForm) {
         break;
     }
   };
+
   return selectPrice ? (
     <Select
       setSelectTitle={setSelectPrice}
@@ -145,21 +153,10 @@ function Add({ cancleAdd, refreshPage }: PayAddForm) {
       </Flex>
       <Flex gap="small">
         <label htmlFor="title">تاریخ پرداخت</label>
-        <input
-          type="number"
-          value={payValues.date}
-          name="date"
-          onChange={onChangeHandler}
-        />
-      </Flex>
-      <Flex gap="small">
-        <label htmlFor="title">تاریخ پرداخت</label>
-        <input
-          type="number"
-          value={payValues.installmentDate}
-          name="installmentDate"
-          onChange={onChangeHandler}
-        />
+        <ConfigProvider locale={fa_IR} direction="rtl">
+          <JalaliLocaleListener />
+          <DatePicker />
+        </ConfigProvider>
       </Flex>
       <Flex gap="small">
         <label htmlFor="title">شماره پیگیری</label>
@@ -173,7 +170,8 @@ function Add({ cancleAdd, refreshPage }: PayAddForm) {
       <Flex gap="small">
         <label htmlFor="title">مبلغ</label>
         <input
-          type="number"
+   data-type="currency" 
+          type="text"
           value={payValues.priceId}
           name="priceId"
           onChange={onChangeHandler}

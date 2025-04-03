@@ -6,15 +6,14 @@ import { Button, Flex } from "antd";
 import { topButtons } from "../../../helper/Styles/Person/List/style";
 import Select from "../../title/select/Select";
 
-function Edit({
-  status,
-  cancleEdit,
-  refreshPage,
-}: StatusEditForm) {
-  // const [installmentTypeValues, setInstallmentTypeValues] =
-  //   useState(installmentType);
+function Edit({ status, cancleEdit, refreshPage }: StatusEditForm) {
+  const [statusValues, setStatusValues] =
+    useState(status);
   const [selectTitle, setSelectTitle] = useState(false);
-  const [selectedTitle, setSelectedTitle] = useState({titleId:status.titleId, title: status.title});
+  const [selectedTitle, setSelectedTitle] = useState({
+   id: status.titleId,
+    caption: status.title,
+  });
 
   const titleSelectHandler = () => setSelectTitle(true);
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,24 +27,19 @@ function Edit({
       default:
         break;
     }
-
   };
   const updateStatus = () => {
-    let newTitleValues = {
-      id: status.id,
-      titleId: status.titleId,
-      title: status.title,
+    let newStatusValues = {
+      id: statusValues.id,
+      titleId: selectedTitle.id,
     };
-    axios
-      .put(
-        STATUS_URL + "/" + status.id,
-        newTitleValues
-      )
-      .then((res) => {
-        console.log(res);
+    console.log('1111',newStatusValues);
+    
+    axios.put(STATUS_URL + "/" + status.id, newStatusValues).then((res) => {
+      console.log(res);
 
-        refreshPage();
-      });
+      refreshPage();
+    });
   };
   return selectTitle ? (
     <Select
@@ -58,11 +52,11 @@ function Edit({
         <label htmlFor="titleId">عنوان</label>
         <input
           type="text"
-          value={selectedTitle.title}
+          value={selectedTitle.caption}
           name="title"
           onChange={onChangeHandler}
         />
-          <input type="button" value="..." onClick={titleSelectHandler} />
+        <input type="button" value="..." onClick={titleSelectHandler} />
       </Flex>
 
       <Flex gap="small">

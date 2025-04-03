@@ -20,7 +20,7 @@ function Delete({ status, cancleDelete , refreshPage}:StatusDeleteForm ) {
         <label htmlFor='titleId'>عنوان</label>
         <input
           type='text'
-          // value={installmentType.titleId}
+          value={status.title}
           name='firstName'
           readOnly={true}
         />

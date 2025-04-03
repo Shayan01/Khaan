@@ -56,11 +56,6 @@ export const InstallmentTypeColumns = [
     key: "title",
   },
   {
-    title: "تعداد اقساط",
-    dataIndex: "count",
-    key: "count",
-  },
-  {
     title: "#",
     dataIndex: "button",
     key: "button",

@@ -30,7 +30,7 @@ function List({
     setStatusSelectedForEdit(null);
   };
   const cancleDelete = () => {
-    statusSelectedForDelete(null);
+    setStatusSelectedForDelete(null);
   };
   const cancleAdd = () => setAddNewStatus(false);
 
@@ -40,6 +40,7 @@ function List({
     let findStatus = statuses.find(
       (p) => p.id === SelectedButtonId
     );
+ 
     
     switch (SelectedButtonName) {
       case "editButton":
@@ -85,13 +86,13 @@ function List({
   );
   return statusSelectedForEdit != null ? (
     <Edit
-      installmentType={statusSelectedForEdit}
+    status={statusSelectedForEdit}
       cancleEdit={cancleEdit}
       refreshPage={refreshPage}
     />
   ) : statusSelectedForDelete != null ? (
     <Delete
-      installmentType={statusSelectedForDelete}
+    status={statusSelectedForDelete}
       cancleDelete={cancleDelete}
       setLoading={setLoading}
       refreshPage={refreshPage}
