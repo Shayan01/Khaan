@@ -25,6 +25,7 @@ function Edit({
   //   console.log(installmentTypeValues.count);
   // }, [installmentTypeValues]);
   const titleSelectHandler = () => setSelectTitle(true);
+  const cancleSelectTitle = () => setSelectTitle(false);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     let name = e.target.name;
@@ -56,6 +57,7 @@ function Edit({
   };
   return selectTitle ? (
     <Select
+    cancleSelectTitle={cancleSelectTitle}
       setSelectTitle={setSelectTitle}
       setSelectedTitle={setSelectedTitle}
     />

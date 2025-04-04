@@ -21,6 +21,7 @@ function Add({ cancleAdd, refreshPage }: InstallmentTypeAddForm) {
   const [selectedTitle, setSelectedTitle] = useState({ id: 0, caption: "" });
 
   const titleSelectHandler = () => setSelectTitle(true);
+  const cancleSelectTitle = () => setSelectTitle(false);
   const AddInstallmentType = () => {
     let newInstallmentTypeValues = {
       count: installmentTypeValues.count,
@@ -56,6 +57,7 @@ function Add({ cancleAdd, refreshPage }: InstallmentTypeAddForm) {
   };
   return selectTitle ? (
     <Select
+    cancleSelectTitle={cancleSelectTitle}
       setSelectTitle={setSelectTitle}
       setSelectedTitle={setSelectedTitle}
     />

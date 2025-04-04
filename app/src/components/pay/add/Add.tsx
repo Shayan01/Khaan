@@ -6,6 +6,9 @@ import { Pay, Title } from "../../../helper/dataTypes/person/dataType";
 import { Button, Flex } from "antd";
 import { topButtons } from "../../../helper/Styles/Person/List/style";
 import Select from "../../title/select/Select";
+import PriceSelect from "../../Price/select/PriceSelect";
+
+
 import {
   Calendar,
   DatePicker,
@@ -28,14 +31,22 @@ function Add({ cancleAdd, refreshPage }: PayAddForm) {
   });
 
   const [selectDate, setselectDate] = useState(null);
+  const [selectTitle, setSelectTitle] = useState(false);
   const [selectPrice, setSelectPrice] = useState(false);
+  const [selectedTitle, setSelectedTitle] = useState({
+    id: 0,
+    caption: "",
+  });
   const [selectedPrice, setSelectedPrice] = useState({
     id: 0,
     titleId: 0,
     amount: "0",
   });
 
+  const titleSelectHandler = () => setSelectTitle(true);
   const priceSelectHandler = () => setSelectPrice(true);
+  const cancleSelectTitle = () => setSelectTitle(false);
+  const cancleSelectPrice = () => setSelectPrice(false);
   const AddPay = () => {
     let newPayValues = {
       score: payValues.score,
@@ -57,7 +68,7 @@ function Add({ cancleAdd, refreshPage }: PayAddForm) {
     let value = e.target.value;
 
     switch (name) {
-      case "priceId":
+      case "price":
         setPayValues({
           ...payValues,
           priceId: selectedPrice.id,
@@ -116,22 +127,30 @@ function Add({ cancleAdd, refreshPage }: PayAddForm) {
     }
   };
 
-  return selectPrice ? (
+  return selectTitle ? (
     <Select
-      setSelectTitle={setSelectPrice}
-      setSelectedTitle={setSelectedPrice}
+    cancleSelectTitle={cancleSelectTitle}
+      setSelectTitle={setSelectTitle}
+      setSelectedTitle={setSelectedTitle}
     />
-  ) : (
+  ) : selectPrice
+   ? (
+    <PriceSelect
+    cancleSelectPrice = {cancleSelectPrice}
+      setSelectPrice={setSelectPrice}
+      setSelectedPrice={setSelectedPrice}
+    />
+  ) :(
     <Flex style={topButtons} vertical gap="middle">
       <Flex gap="small">
         <label htmlFor="title">عنوان</label>
         <input
           type="text"
-          value={selectedPrice.titleId}
+          value={selectedTitle.caption}
           name="caption"
           onChange={onChangeHandler}
         />
-        <input type="button" value="..." onClick={priceSelectHandler} />
+        <input type="button" value="..." onClick={titleSelectHandler} />
       </Flex>
       <Flex gap="small">
         <label htmlFor="title">امتیاز</label>
@@ -170,12 +189,13 @@ function Add({ cancleAdd, refreshPage }: PayAddForm) {
       <Flex gap="small">
         <label htmlFor="title">مبلغ</label>
         <input
-   data-type="currency" 
+          data-type="currency"
           type="text"
-          value={payValues.priceId}
-          name="priceId"
+          value={selectedPrice.amount}
+          name="price"
           onChange={onChangeHandler}
         />
+         <input type="button" value="..." onClick={priceSelectHandler} />
       </Flex>
       <Flex gap="small">
         <label htmlFor="title">مربوط به وام</label>

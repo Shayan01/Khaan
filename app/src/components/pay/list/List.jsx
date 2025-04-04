@@ -18,12 +18,8 @@ function List({
   mainButtonHandler,
   prices,
 }) {
-  const [paySelectedForEdit, setPaySelectedForEdit] =
-    useState(null);
-  const [
-    paySelectedForDelete,
-    SetPaySelectedForDelete,
-  ] = useState(null);
+  const [paySelectedForEdit, setPaySelectedForEdit] = useState(null);
+  const [paySelectedForDelete, SetPaySelectedForDelete] = useState(null);
   const [addNewPay, setAddNewPay] = useState(false);
   const cancleEdit = () => {
     setPaySelectedForEdit(null);
@@ -36,9 +32,7 @@ function List({
   const buttonClick = (id, name) => {
     let SelectedButtonId = id;
     const SelectedButtonName = name;
-    let findPay = pays.find(
-      (p) => p.id === SelectedButtonId
-    );
+    let findPay = pays.find((p) => p.id === SelectedButtonId);
     switch (SelectedButtonName) {
       case "editButton":
         setPaySelectedForEdit(findPay);
@@ -95,7 +89,10 @@ function List({
       refreshPage={refreshPage}
     />
   ) : addNewPay ? (
-    <Add cancleAdd={cancleAdd} refreshPage={refreshPage} />
+    <Add
+      cancleAdd={cancleAdd}
+      refreshPage={refreshPage}
+       />
   ) : (
     <Flex vertical gap="middle">
       <Flex style={topButtons} gap="middle">

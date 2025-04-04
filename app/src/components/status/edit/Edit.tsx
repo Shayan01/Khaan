@@ -16,6 +16,7 @@ function Edit({ status, cancleEdit, refreshPage }: StatusEditForm) {
   });
 
   const titleSelectHandler = () => setSelectTitle(true);
+  const cancleSelectTitle = () =>setSelectTitle(false);
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -43,6 +44,7 @@ function Edit({ status, cancleEdit, refreshPage }: StatusEditForm) {
   };
   return selectTitle ? (
     <Select
+    cancleSelectTitle={cancleSelectTitle}
       setSelectTitle={setSelectTitle}
       setSelectedTitle={setSelectedTitle}
     />

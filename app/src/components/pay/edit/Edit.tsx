@@ -5,6 +5,7 @@ import { PayEditForm } from "../../../helper/dataTypes/person/Edit/dataTypes";
 import { Button, Flex } from "antd";
 import { topButtons } from "../../../helper/Styles/Person/List/style";
 import Select from "../../title/select/Select";
+import PriceSelect from "../../Price/select/PriceSelect";
 
 function Edit({
   pay,
@@ -17,6 +18,7 @@ function Edit({
   const [selectedPrice, setSelectedPrice] = useState({titleId:pay.priceId, price: pay.priceId});
 
   const priceSelectHandler = () => setSelectPrice(true);
+  const cancleSelectPrice = () => setSelectPrice(false);
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -48,9 +50,10 @@ function Edit({
       });
   };
   return selectPrice ? (
-    <Select
-      setSelectTitle={setSelectPrice}
-      setSelectedTitle={setSelectedPrice}
+    <PriceSelect
+    cancleSelectPrice={cancleSelectPrice}
+      setSelectPrice={setSelectPrice}
+      setSelectedPrice={setSelectedPrice}
     />
   ) : (
     <Flex style={topButtons} vertical gap="middle">

@@ -1,48 +1,54 @@
-import  { useState } from 'react'
-import { Table, Button, Flex, } from 'antd'
-import { personsColumns } from '../../../helper/constants/personColomns'
-import EditForm from '../Edit/EditForm'
-import DeleteForm from '../Delete/DeleteForm'
-import AddForm from '../Add/AddForm';
-import '../../../App.css'
-import { topButtons } from '../../../helper/Styles/Person/List/style'
+import { useState } from "react";
+import { Table, Button, Flex } from "antd";
+import { personsColumns } from "../../../helper/constants/personColomns";
+import EditForm from "../Edit/EditForm";
+import DeleteForm from "../Delete/DeleteForm";
+import AddForm from "../Add/AddForm";
+import "../../../App.css";
+import { topButtons } from "../../../helper/Styles/Person/List/style";
 
-function ListForm({ persons , loading, searchHandler, searchText, setLoading, refreshPage, mainButtonHandler }) {
-  const [personSelectedForEdit, setPersonSelectedForEdit] = useState(null)
-  const [personSelectedForDelete, setPersonSelectedForDelete] = useState(null)
-  const [AddNewPerson, setAddNewPerson] = useState(false)
+function ListForm({
+  persons,
+  loading,
+  searchHandler,
+  searchText,
+  setLoading,
+  refreshPage,
+  mainButtonHandler,
+}) {
+  const [personSelectedForEdit, setPersonSelectedForEdit] = useState(null);
+  const [personSelectedForDelete, setPersonSelectedForDelete] = useState(null);
+  const [AddNewPerson, setAddNewPerson] = useState(false);
   // console.log('ListForm persons ', persons)
   // console.log('col ', columns)
 
- 
   const cancleEdit = () => {
     setPersonSelectedForEdit(null);
-   }
+  };
   const cancleDelete = () => {
-    setPersonSelectedForDelete(null)
-  }
-  const cancleAdd  =() => setAddNewPerson(false);
- 
-  
-  const buttonClick = (id,name) => {
+    setPersonSelectedForDelete(null);
+  };
+  const cancleAdd = () => setAddNewPerson(false);
+
+  const buttonClick = (id, name) => {
     console.log(id);
     console.log(name);
-    
-    let SelectedButtonId = id
-    const SelectedButtonName = name
-    let findPerson  = persons.find((p) => p.id === SelectedButtonId)
+
+    let SelectedButtonId = id;
+    const SelectedButtonName = name;
+    let findPerson = persons.find((p) => p.id === SelectedButtonId);
     switch (SelectedButtonName) {
-      case 'editButton':
-        setPersonSelectedForEdit(findPerson)
-        break
-      case 'deleteButton':
-        setPersonSelectedForDelete(findPerson)
-   
-        break
+      case "editButton":
+        setPersonSelectedForEdit(findPerson);
+        break;
+      case "deleteButton":
+        setPersonSelectedForDelete(findPerson);
+
+        break;
       default:
-        break
+        break;
     }
-  }
+  };
   persons.forEach(
     (p) => (
       (p.key = p.id),
@@ -54,7 +60,7 @@ function ListForm({ persons , loading, searchHandler, searchText, setLoading, re
             color="default"
             variant="solid"
             id={p.id}
-            onClick={()=>buttonClick(p.id, "editButton")}
+            onClick={() => buttonClick(p.id, "editButton")}
           >
             ویرایش
           </Button>
@@ -64,7 +70,7 @@ function ListForm({ persons , loading, searchHandler, searchText, setLoading, re
             variant="solid"
             name="deleteButton"
             id={p.id}
-            onClick={()=>buttonClick(p.id, "deleteButton")}
+            onClick={() => buttonClick(p.id, "deleteButton")}
           >
             حذف
           </Button>
@@ -89,18 +95,18 @@ function ListForm({ persons , loading, searchHandler, searchText, setLoading, re
     <AddForm cancleAdd={cancleAdd} refreshPage={refreshPage} />
   ) : (
     <Flex vertical gap="middle">
-      <Flex style={topButtons} gap="middle" >
+      <Flex style={topButtons} gap="middle">
         <Button type="primary" onClick={refreshPage}>
           بروزرسانی
         </Button>
         <Button type="primary" onClick={() => setAddNewPerson(true)}>
           افزودن
         </Button>
-        <Button type="primary"   onClick={()=>mainButtonHandler("")}>
+        <Button type="primary" onClick={() => mainButtonHandler("")}>
           بازگشت
         </Button>
       </Flex>
-      <Flex style={topButtons}  wrap>
+      <Flex style={topButtons} wrap>
         <input type="search" onChange={searchHandler} value={searchText} />
       </Flex>
       <Table
@@ -122,4 +128,4 @@ function ListForm({ persons , loading, searchHandler, searchText, setLoading, re
   );
 }
 
-export default ListForm
+export default ListForm;

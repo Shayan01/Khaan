@@ -17,6 +17,7 @@ function Edit({
   const [selectedTitle, setSelectedTitle] = useState({titleId:loan.titleId, title: loan.title});
 
   const titleSelectHandler = () => setSelectTitle(true);
+  const cancleSelectTitle = () => setSelectTitle(false);
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -49,6 +50,7 @@ function Edit({
   };
   return selectTitle ? (
     <Select
+    cancleSelectTitle={cancleSelectTitle}
       setSelectTitle={setSelectTitle}
       setSelectedTitle={setSelectedTitle}
     />

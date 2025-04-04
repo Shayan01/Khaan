@@ -16,7 +16,7 @@ function Loans({ mainButtonHandler }) {
   const [searchText, setSearchText] = useState("");
 
   const refreshPage = () => {
-    window.location.reload();
+   setLoading(true)
   };
   const searchHandler = (input) => {
     let value = input.target.value;
@@ -30,7 +30,7 @@ function Loans({ mainButtonHandler }) {
       setTitles(res.data);
     });
     setLoading(false);
-  }, []);
+  }, [loading]);
 
   return loading ? (
     <div>Loading...</div>

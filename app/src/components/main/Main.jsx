@@ -13,8 +13,6 @@ function Main() {
   const [page, setPage] = useState("");
 
   const mainButtonHandler = (buttonName) => {
-    console.log(buttonName);
-
     setPage(buttonName);
   };
   const refreshPage = () => {

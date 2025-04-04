@@ -28,6 +28,7 @@ function Add({ cancleAdd, refreshPage }: LoanAddForm) {
   const [selectedTitle, setSelectedTitle] = useState({ id: 0, caption: "" });
 
   const titleSelectHandler = () => setSelectTitle(true);
+  const cancleSelectTitle = () => setSelectTitle(false);
   const AddLoan = () => {
     let newLoanValues = {
       code: loanValues.code,
@@ -60,6 +61,7 @@ function Add({ cancleAdd, refreshPage }: LoanAddForm) {
   };
   return selectTitle ? (
     <Select
+    cancleSelectTitle={cancleSelectTitle}
       setSelectTitle={setSelectTitle}
       setSelectedTitle={setSelectedTitle}
     />

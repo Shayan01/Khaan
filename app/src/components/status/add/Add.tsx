@@ -19,8 +19,9 @@ function Add({ cancleAdd, refreshPage }: StatusAddForm) {
 
   const [selectTitle, setSelectTitle] = useState(false);
   const [selectedTitle, setSelectedTitle] = useState({ id: 0, caption: "" });
-
+  
   const titleSelectHandler = () => setSelectTitle(true);
+  const cancleSelectTitle = () => setSelectTitle(false);
   const AddStatus = () => {
     let newStatusValues = {
       id: statusValues.id,
@@ -49,6 +50,7 @@ function Add({ cancleAdd, refreshPage }: StatusAddForm) {
   };
   return selectTitle ? (
     <Select
+    cancleSelectTitle={cancleSelectTitle}
       setSelectTitle={setSelectTitle}
       setSelectedTitle={setSelectedTitle}
     />

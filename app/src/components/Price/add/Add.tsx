@@ -19,6 +19,7 @@ function Add({ cancleAdd, refreshPage }: PriceAddForm) {
   const [selectedTitle, setSelectedTitle] = useState({ id: 0, caption: "" });
 
   const titleSelectHandler = () => setSelectTitle(true);
+  const cancleSelectTitle = () => setSelectTitle(false);
   const AddPrice = () => {
     let newPricValues = {
       amount: priceValues.amount,
@@ -54,6 +55,7 @@ function Add({ cancleAdd, refreshPage }: PriceAddForm) {
   };
   return selectTitle ? (
     <Select
+    cancleSelectTitle={cancleSelectTitle}
       setSelectTitle={setSelectTitle}
       setSelectedTitle={setSelectedTitle}
     />
